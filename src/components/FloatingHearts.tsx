@@ -202,7 +202,9 @@ export default function FloatingHearts({
             {heartsRef.current.map((h, i) => (
                 <div
                     key={i}
-                    ref={(el) => (heartRefs.current[i] = el)}
+                    ref={(el) => {
+                        heartRefs.current[i] = el;
+                    }}
                     className="absolute pointer-events-none"
                     style={{
                         width: h.size,

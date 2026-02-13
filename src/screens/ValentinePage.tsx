@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { AnimatePresence, motion, useMotionValue, useTransform, animate } from "framer-motion";
+import { motion, useMotionValue, useTransform, animate } from "framer-motion";
 import HeartHalf from "../components/HeartHalf";
 import FloatingHearts from "../components/FloatingHearts";
 import HeartPhoto from "../components/HeartPhoto";
@@ -21,19 +21,17 @@ const MUSIC_SRC = "/music/love.mp3";
 export default function ValentinePage() {
     const [open, setOpen] = useState(false);
     const [page, setPage] = useState(0);
-    const [musicOn, setMusicOn] = useState(false);
+    const [, setMusicOn] = useState(false);
     const audioRef = useRef<HTMLAudioElement | null>(null);
     const openMV = useMotionValue(0); // 0 = closed, 1 = open
     const [shuffleOn, setShuffleOn] = useState(false);
     const [shufflePair, setShufflePair] = useState<Spread>(SPREADS[0]);
     const shuffleTimerRef = useRef<number | null>(null);
     const autoTimerRef = useRef<number | null>(null);
-    const [autoOn, setAutoOn] = useState(false);
     const spread = useMemo(() => SPREADS[page % SPREADS.length], [page]);
     const activeSpread = shuffleOn ? shufflePair : spread;
 
     const [progress, setProgress] = useState(0);
-    const progressAnimRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
     const SLIDE_MS = 5500;          // интервал между сменами
     const FADE_SEC = 1.5;           // длительность fade (должна совпасть с HeartPhoto fadeDuration)
