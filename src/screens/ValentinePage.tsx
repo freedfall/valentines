@@ -31,6 +31,9 @@ export default function ValentinePage() {
     const autoTimerRef = useRef<number | null>(null);
     const spread = useMemo(() => SPREADS[page % SPREADS.length], [page]);
     const activeSpread = shuffleOn ? shufflePair : spread;
+    const [assetsReady, setAssetsReady] = useState(false);
+    const preloadRef = useRef<Promise<void> | null>(null);
+
 
     const [progress, setProgress] = useState(0);
 
@@ -58,6 +61,63 @@ export default function ValentinePage() {
         return () => cancelAnimationFrame(raf);
     }, [page, open, shuffleOn]);
 
+    const preloadAll = () => {
+        if (preloadRef.current) return preloadRef.current;
+
+        const urls = SPREADS.flatMap(s => [s.left, s.right]);
+
+        preloadRef.current = (async () => {
+            // 1) preload images + decode
+            await Promise.all(
+                urls.map((url) => new Promise<void>((resolve) => {
+                    const img = new Image();
+                    img.decoding = "async";
+                    img.loading = "eager";
+                    img.src = url;
+
+                    const done = async () => {
+                        // decode() делает ключевую разницу — убирает фризы на первом показе
+                        // (если браузер поддерживает)
+                        try {
+                            // @ts-ignore
+                            if (img.decode) await img.decode();
+                        } catch {
+                            // ignore decode errors
+                        }
+                        resolve();
+                    };
+
+                    if (img.complete) {
+                        void done();
+                    } else {
+                        img.onload = () => void done();
+                        img.onerror = () => resolve(); // не блокируем весь сайт из-за одной фотки
+                    }
+                }))
+            );
+
+            // 2) чуть прогреть аудио (не play — браузер может запретить)
+            const a = audioRef.current;
+            if (a) {
+                try {
+                    a.preload = "auto";
+                    // принудительно дернуть загрузку
+                    a.load();
+                } catch {}
+            }
+        })();
+
+        return preloadRef.current;
+    };
+
+    useEffect(() => {
+        let alive = true;
+        preloadAll().then(() => {
+            if (alive) setAssetsReady(true);
+        });
+        return () => { alive = false; };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     const pickRandomSpread = (avoid?: Spread) => {
         if (SPREADS.length === 1) return SPREADS[0];
@@ -133,6 +193,11 @@ export default function ValentinePage() {
 
 
     const openHeart = async () => {
+        if (!assetsReady) {
+            await preloadAll();
+            setAssetsReady(true);
+        }
+
         setOpen(true); // нужно, чтобы кнопки/контролы появились
         animate(openMV, 1, { duration: 1.05, ease: [0.22, 1, 0.36, 1] }); // smooth “book open”
         startShuffle(page);
@@ -281,7 +346,11 @@ export default function ValentinePage() {
                                     onClick={() => (open ? closeHeart() : openHeart())}
                                     className="absolute inset-0"
                                     aria-label="Toggle"
+                                    disabled={!assetsReady && !open}
                                 />
+                                {!assetsReady && (
+                                    <div className="text-rose-600/70 text-sm mt-2">Загружаю воспоминания… 💗</div>
+                                )}
                             </motion.div>
                         </div>
                     </div>
