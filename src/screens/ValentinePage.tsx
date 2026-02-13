@@ -17,7 +17,7 @@ const SPREADS: Spread[] = [
     { left: ASSET("/photos/IMG_5562.JPG"), right: ASSET("/photos/IMG_5563.JPG") },
 ];
 
-const MUSIC_SRC = "/music/love.mp3";
+const MUSIC_SRC = ASSET("music/love.mp3");;
 
 export default function ValentinePage() {
     const [open, setOpen] = useState(false);
