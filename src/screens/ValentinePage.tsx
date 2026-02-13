@@ -240,7 +240,7 @@ export default function ValentinePage() {
         <div className="min-h-screen relative bg-gradient-to-b from-pink-50 via-rose-50 to-rose-100 flex items-center justify-center p-6">
             <audio ref={audioRef} src={MUSIC_SRC} loop />
 
-            <FloatingHearts count={40} />
+            <FloatingHearts count={70} />
 
             <div className="w-full max-w-3xl">
                 <div className="text-center mb-8">
