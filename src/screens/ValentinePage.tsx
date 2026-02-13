@@ -5,15 +5,16 @@ import FloatingHearts from "../components/FloatingHearts";
 import HeartPhoto from "../components/HeartPhoto";
 
 type Spread = { left: string; right: string };
+const ASSET = (p: string) => `${import.meta.env.BASE_URL}${p}`;
 
 const SPREADS: Spread[] = [
-    { left: "/photos/IMG_0019.JPG", right: "/photos/IMG_0949.JPG" },
-    { left: "/photos/IMG_1662.JPG", right: "/photos/IMG_1786.JPG" },
-    { left: "/photos/IMG_2064.JPG", right: "/photos/IMG_2417.JPG" },
-    { left: "/photos/IMG_2435.JPG", right: "/photos/IMG_5029.JPG" },
-    { left: "/photos/IMG_0872.JPG", right: "/photos/IMG_1120.JPG" },
-    { left: "/photos/IMG_2296.JPG", right: "/photos/IMG_2306.JPG" },
-    { left: "/photos/IMG_5562.JPG", right: "/photos/IMG_5563.JPG" },
+    { left: ASSET("/photos/IMG_0019.JPG"), right: ASSET("/photos/IMG_0949.JPG") },
+    { left: ASSET("/photos/IMG_1662.JPG"), right: ASSET("/photos/IMG_1786.JPG") },
+    { left: ASSET("/photos/IMG_2064.JPG"), right: ASSET("/photos/IMG_2417.JPG") },
+    { left: ASSET("/photos/IMG_2435.JPG"), right: ASSET("/photos/IMG_5029.JPG") },
+    { left: ASSET("/photos/IMG_0872.JPG"), right: ASSET("/photos/IMG_1120.JPG") },
+    { left: ASSET("/photos/IMG_2296.JPG"), right: ASSET("/photos/IMG_2306.JPG") },
+    { left: ASSET("/photos/IMG_5562.JPG"), right: ASSET("/photos/IMG_5563.JPG") },
 ];
 
 const MUSIC_SRC = "/music/love.mp3";
