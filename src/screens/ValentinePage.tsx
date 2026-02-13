@@ -348,13 +348,14 @@ export default function ValentinePage() {
                                     aria-label="Toggle"
                                     disabled={!assetsReady && !open}
                                 />
-                                {!assetsReady && (
-                                    <div className="text-rose-600/70 text-sm mt-2">Загружаю воспоминания… 💗</div>
-                                )}
+
                             </motion.div>
                         </div>
                     </div>
                 </div>
+                {!assetsReady && (
+                    <div className="flex justify-self-center text-rose-900 text-sm mt-2">Загружаю воспоминания… 💗</div>
+                )}
             </div>
         </div>
     );
