@@ -1,0 +1,38 @@
+@import "tailwindcss";
+@import url("https://fonts.googleapis.com/css2?family=Great+Vibes&family=Inter:wght@400;500;600&display=swap");
+
+:root {
+    --font-body: "Inter", ui-sans-serif, system-ui, -apple-system;
+    --font-love: "Great Vibes", cursive;
+}
+
+body {
+    font-family: var(--font-body);
+}
+
+.font-love {
+    font-family: var(--font-love);
+}
+
+
+html, body, #root {
+    height: 100%;
+}
+
+/* 3D helpers */
+.perspective-1000 { perspective: 1000px; }
+.preserve-3d { transform-style: preserve-3d; }
+.backface-hidden { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+.perspective-1200 { perspective: 1200px; }
+.perspective-1400 { perspective: 1400px; }
+
+
+/* Heart mask (тот же, чтобы фото были сердцем) */
+.heart-mask {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath d='M256 448s-44.8-27.2-83.2-56.3C112 350.2 48 295.2 48 208 48 141.5 101.5 88 168 88c38.1 0 74 18.2 96 46.4C286 106.2 321.9 88 360 88c66.5 0 120 53.5 120 120 0 87.2-64 142.2-124.8 183.7C300.8 420.8 256 448 256 448z'/%3E%3C/svg%3E");
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath d='M256 448s-44.8-27.2-83.2-56.3C112 350.2 48 295.2 48 208 48 141.5 101.5 88 168 88c38.1 0 74 18.2 96 46.4C286 106.2 321.9 88 360 88c66.5 0 120 53.5 120 120 0 87.2-64 142.2-124.8 183.7C300.8 420.8 256 448 256 448z'/%3E%3C/svg%3E");
+    -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
+    -webkit-mask-position: center; mask-position: center;
+    -webkit-mask-size: contain; mask-size: contain;
+}
+
