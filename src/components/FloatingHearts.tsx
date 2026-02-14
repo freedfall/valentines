@@ -29,7 +29,7 @@ export default function FloatingHearts({
        count = 50,
        baseUpSpeed = 0.55,
        drift = 0.2,
-       repelRadius = 80,
+       repelRadius = 100,
        repelForce = 0.55,
        friction = 0.96,
        parallax = 18, // px амплитуда параллакса

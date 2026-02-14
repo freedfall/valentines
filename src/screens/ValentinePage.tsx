@@ -3,6 +3,7 @@ import { motion, useMotionValue, useTransform, animate } from "framer-motion";
 import HeartHalf from "../components/HeartHalf";
 import FloatingHearts from "../components/FloatingHearts";
 import HeartPhoto from "../components/HeartPhoto";
+import LoveTicker from "../components/LoveTicker";
 
 type Spread = { left: string; right: string };
 const ASSET = (p: string) => `${import.meta.env.BASE_URL}${p}`;
@@ -238,6 +239,8 @@ export default function ValentinePage() {
 
     return (
         <div className="min-h-screen relative bg-gradient-to-b from-pink-50 via-rose-50 to-rose-100 flex items-center justify-center p-6">
+            {open && (<LoveTicker />)}
+
             <audio ref={audioRef} src={MUSIC_SRC} loop />
 
             <FloatingHearts count={70} />
